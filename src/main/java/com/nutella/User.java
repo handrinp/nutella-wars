@@ -35,7 +35,6 @@ public class User {
         this.spells = spells;
     }
 
-
     public void echoStats() {
         Engine.echo("Username: " + username);
         Engine.echo("Build: " + (build == Build.OFFENSIVE ? "OFFENSIVE" : (build == Build.DEFENSIVE ? "DEFENSIVE" : "MAGICAL")));
