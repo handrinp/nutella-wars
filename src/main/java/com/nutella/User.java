@@ -36,17 +36,18 @@ public class User {
     }
 
 
-    public String toString() {
-        return "Username: " + username + "\n" +
-                "Build: " + (build == Build.OFFENSIVE ? "OFFENSIVE" : (build == Build.DEFENSIVE ? "DEFENSIVE" : "MAGICAL")) + "\n" +
-                "Attack: " + atk + "\n" +
-                "Defense: " + def + "\n" +
-                "Experience: " + exp + "\n" +
-                "Level: " + lv + "\n" +
-                "HP: " + curHP + "/" + maxHP + "\n" +
-                "SP: " + curSP + "/" + maxSP + "\n" +
-                "Gold: " + gold + "\n" +
-                "Spells: " + spells + "\n";
+    public void echoStats() {
+        Engine.echo("Username: " + username);
+        Engine.echo("Build: " + (build == Build.OFFENSIVE ? "OFFENSIVE" : (build == Build.DEFENSIVE ? "DEFENSIVE" : "MAGICAL")));
+        Engine.echo("Attack: " + atk);
+        Engine.echo("Defense: " + def);
+        Engine.echo("Experience: " + exp);
+        Engine.echo("Level: " + lv);
+        Engine.echo("HP: " + curHP + "/" + maxHP);
+        Engine.echo("SP: " + curSP + "/" + maxSP);
+        Engine.echo("Gold: " + gold);
+        Engine.echo("Spells: " + spells);
+        Engine.echoLine();
     }
 
     public void makeSaveFile() throws FileNotFoundException {
@@ -57,6 +58,12 @@ public class User {
     }
 
     private static File fileFromUser(String username) {
+        File accountsDir = new File("accounts");
+
+        if (!(accountsDir.isDirectory() || accountsDir.mkdir())) {
+            Engine.error("could not make missing accounts directory");
+        }
+
         return new File("accounts/" + username + ".acc");
     }
 
@@ -74,8 +81,9 @@ public class User {
                 // rehydrate User
                 loggedInAs = new User(user, stat.nextInt(), stat.nextInt(), stat.nextInt(), stat.nextInt(),
                         stat.nextInt(), stat.nextInt(), stat.nextInt(), stat.nextInt(), stat.nextInt());
+                Engine.echo("Logged in successfully!");
             } catch (FileNotFoundException e) {
-                Engine.error("login failed");
+                Engine.error("login failed", e);
             }
         } else {
             // make new account?
@@ -86,6 +94,7 @@ public class User {
                 // TODO: error checking
                 Engine.print("What kind of jar do you want to be? (0=OFFENSIVE, 1=DEFENSIVE, 2=MAGICAL): ");
                 loggedInAs = new User(user, Engine.getInt(), 5, 2, 0, 1, 15, 0, 100, 0);
+                Engine.echo("Account created successfully!");
             }
         }
 
@@ -95,9 +104,8 @@ public class User {
     public static User loginPrompt() {
         Engine.echo("Login");
         Engine.print("Username: ");
-        String username = Engine.getString();
+        User user = login(Engine.getString());
         Engine.echoLine();
-        return login(username);
+        return user;
     }
 }
-
