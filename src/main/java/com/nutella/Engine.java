@@ -79,7 +79,7 @@ public class Engine {
             } else if (choice == Menu.GET_INFO) {
                 Map.echoInfo(curLocation);
             } else if (choice == Menu.GO_INSIDE) {
-                Map.goInside(curLocation);
+                Map.goInside(curLocation, user);
             } else if (choice == Menu.TRAVEL) {
                 curLocation = Map.travel(curLocation);
             } else {

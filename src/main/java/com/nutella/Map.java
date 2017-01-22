@@ -32,8 +32,13 @@ public class Map {
         Engine.echoLine();
     }
 
-    public static void goInside(int curLocation) {
-        
+    public static void goInside(int curLocation, User user) {
+        if (curLocation == JAR_CENTRAL) {
+        } else if (curLocation == JARENA) {
+        } else if (curLocation == HAZELNUT_HOSPITAL) {
+        } else if (curLocation == SHOP) {
+            Shop.goInside(user);
+        }
     }
 
     public static int travel(int curLocation) {
