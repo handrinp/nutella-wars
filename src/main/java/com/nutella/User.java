@@ -86,12 +86,12 @@ public class User {
             }
         } else {
             // make new account?
-            Engine.print("Account does not exist, would you like to make a new account? (0=YES, 1=NO)");
+            Engine.echo("Account does not exist, would you like to make a new account? (0=YES, 1=NO)");
 
             // Create new jar
             if (Engine.getInt() == 0) {
                 // TODO: error checking
-                Engine.print("What kind of jar do you want to be? (0=OFFENSIVE, 1=DEFENSIVE, 2=MAGICAL)");
+                Engine.echo("What kind of jar do you want to be? (0=OFFENSIVE, 1=DEFENSIVE, 2=MAGICAL)");
                 loggedInAs = new User(user, Engine.getInt(), 5, 2, 0, 1, 15, 0, 100, 0);
                 Engine.echo("Account created successfully!");
             }

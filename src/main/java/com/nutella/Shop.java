@@ -1,12 +1,12 @@
 package com.nutella;
 
 public class Shop {
-    private static final int EXIT_SHOP = 0;
-    private static final int GET_INFO  = 1;
-    private static final int TRAIN_HP  = 2;
-    private static final int TRAIN_ATK = 3;
-    private static final int TRAIN_DEF = 4;
-    private static final int TRAIN_SP  = 5;
+    private static final int GO_OUTSIDE = 0;
+    private static final int GET_INFO   = 1;
+    private static final int TRAIN_HP   = 2;
+    private static final int TRAIN_ATK  = 3;
+    private static final int TRAIN_DEF  = 4;
+    private static final int TRAIN_SP   = 5;
 
     private static final int HP_COST  = 60;
     private static final int ATK_COST = 40;
@@ -31,7 +31,7 @@ public class Shop {
 
     public static void goInside(User user) {
         openPrompt();
-        shopLoop(user);
+        mainLoop(user);
         closePrompt();
     }
 
@@ -45,7 +45,7 @@ public class Shop {
         Engine.echoLine();
     }
 
-    private static void shopLoop(User user) {
+    private static void mainLoop(User user) {
         boolean loop = true;
         int choice;
         int numOptions = MENU_OPTIONS.length;
@@ -66,7 +66,7 @@ public class Shop {
             choice = Engine.getInt();
             Engine.echoLine();
 
-            if (choice == EXIT_SHOP) {
+            if (choice == GO_OUTSIDE) {
                 loop = false;
             } else if (choice == GET_INFO) {
                 Engine.echo("Here you can buy upgrades for your jar with gold.");
@@ -110,7 +110,7 @@ public class Shop {
                 Engine.error("that wasn't an option");
             }
 
-            if (choice != EXIT_SHOP) Engine.echoLine();
+            if (choice != GO_OUTSIDE) Engine.echoLine();
         }
     }
 }

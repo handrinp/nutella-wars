@@ -36,6 +36,7 @@ public class Map {
         if (curLocation == JAR_CENTRAL) {
         } else if (curLocation == JARENA) {
         } else if (curLocation == HAZELNUT_HOSPITAL) {
+            Hospital.goInside(user);
         } else if (curLocation == SHOP) {
             Shop.goInside(user);
         }
