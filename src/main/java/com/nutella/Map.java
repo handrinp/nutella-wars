@@ -49,7 +49,6 @@ public class Map {
         }
 
         // parse input
-        Engine.print("> ");
         int choice = Engine.getInt();
 
         if (choice > -1 && choice < LOCATION.length) {

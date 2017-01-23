@@ -6,18 +6,18 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class User {
-    private String username;
-    private int build;
-    private int atk;
-    private int def;
-    private int exp;
-    private int lv;
-    private int curHP;
-    private int maxHP;
-    private int curSP;
-    private int maxSP;
-    private int gold;
-    private int spells;
+    public String username;
+    public int build;
+    public int atk;
+    public int def;
+    public int exp;
+    public int lv;
+    public int curHP;
+    public int maxHP;
+    public int curSP;
+    public int maxSP;
+    public int gold;
+    public int spells;
 
     // internal constructor
     private User(String username, int build, int atk, int def, int exp, int lv, int HP, int SP, int gold, int spells) {
@@ -86,12 +86,12 @@ public class User {
             }
         } else {
             // make new account?
-            Engine.print("Account does not exist, would you like to make a new account? (0=YES, 1=NO): ");
+            Engine.print("Account does not exist, would you like to make a new account? (0=YES, 1=NO)");
 
             // Create new jar
             if (Engine.getInt() == 0) {
                 // TODO: error checking
-                Engine.print("What kind of jar do you want to be? (0=OFFENSIVE, 1=DEFENSIVE, 2=MAGICAL): ");
+                Engine.print("What kind of jar do you want to be? (0=OFFENSIVE, 1=DEFENSIVE, 2=MAGICAL)");
                 loggedInAs = new User(user, Engine.getInt(), 5, 2, 0, 1, 15, 0, 100, 0);
                 Engine.echo("Account created successfully!");
             }

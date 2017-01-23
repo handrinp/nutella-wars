@@ -9,6 +9,21 @@ import java.util.Scanner;
 
 public class Engine {
     private static final String PRELINE = "|| ";
+    private static final String LOG_FILE = "nutella.log";
+
+    private static final int EXIT_GAME   = 0;
+    private static final int CHECK_STATS = 1;
+    private static final int GET_INFO    = 2;
+    private static final int GO_INSIDE   = 3;
+    private static final int TRAVEL      = 4;
+
+    private static final String[] MENU_OPTIONS = {
+        "Exit the game",
+        "Check your stats",
+        "Learn more about this location",
+        "Go inside",
+        "Travel"
+    };
 
     private static Scanner in = null;
     private static PrintWriter err = null;
@@ -29,7 +44,7 @@ public class Engine {
         in = new Scanner(System.in);
 
         try {
-            File errFile = new File("log.txt");
+            File errFile = new File(LOG_FILE);
 
             if (!errFile.isFile()) {
                 new PrintWriter(errFile).close();
@@ -37,7 +52,7 @@ public class Engine {
 
             err = new PrintWriter(errFile);
         } catch (FileNotFoundException e) {
-            error("could not open log.txt for writing", e);
+            error("could not open " + LOG_FILE + " for writing");
         }
 
         Engine.echo("Welcome to Nutella Wars!");
@@ -45,9 +60,9 @@ public class Engine {
     }
 
     private static void closePrompt() {
+        echo("Thanks for playing Nutella Wars!\n");
         in.close();
         err.close();
-        echo("Thanks for playing Nutella Wars!\n");
     }
 
     private static void mainLoop(User user) {
@@ -61,26 +76,24 @@ public class Engine {
 
             // print your options
             echo("What would you like to do?");
-            echo("  (0) Exit the game");
-            echo("  (1) Check your stats");
-            echo("  (2) Learn more about this location");
-            echo("  (3) Go inside");
-            echo("  (4) Travel");
+
+            for (int i = 0; i < MENU_OPTIONS.length; ++i) {
+                echo("  (" + i + ") " + MENU_OPTIONS[i]);
+            }
 
             // parse input
-            print("> ");
             choice = getInt();
             echoLine();
 
-            if (choice == Menu.EXIT_GAME) {
+            if (choice == EXIT_GAME) {
                 loop = false;
-            } else if (choice == Menu.CHECK_STATS) {
+            } else if (choice == CHECK_STATS) {
                 user.echoStats();
-            } else if (choice == Menu.GET_INFO) {
+            } else if (choice == GET_INFO) {
                 Map.echoInfo(curLocation);
-            } else if (choice == Menu.GO_INSIDE) {
+            } else if (choice == GO_INSIDE) {
                 Map.goInside(curLocation, user);
-            } else if (choice == Menu.TRAVEL) {
+            } else if (choice == TRAVEL) {
                 curLocation = Map.travel(curLocation);
             } else {
                 error("that wasn't an option");
@@ -101,28 +114,29 @@ public class Engine {
         echoLine();
     }
 
+    public static void print(String msg) {
+        System.out.print(PRELINE + msg);
+        if (err != null) err.print(timeStamp() + "   GAME: " + msg);
+    }
+
     public static void echo(String msg) {
-        System.out.println(PRELINE + msg);
+        print(msg + System.getProperty("line.separator"));
     }
 
     public static void echo() {
         echo("");
     }
 
-    public static void print(String msg) {
-        System.out.print(PRELINE + msg);
-    }
-
     public static void error(String msg) {
         System.err.println("~~ ERROR - " + msg);
         if (err != null) err.println(timeStamp() + "  ERROR: " + msg);
     }
-    
+
     public static void error(String msg, Exception e) {
         error(msg);
         if (err != null) err.println(e.getStackTrace());
     }
-    
+
     private static String timeStamp() {
         return "[" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + "]";
     }
@@ -137,10 +151,26 @@ public class Engine {
      * TODO: add error handling
      */
     public static int getInt() {
-        return Integer.parseInt(in.nextLine());
+        int val = 0;
+        boolean invalid = true;
+
+        while (invalid) {
+            try {
+                print("> ");
+                val = Integer.parseInt(in.nextLine());
+                invalid = false;
+            } catch (NumberFormatException e) {
+                error("that's not a number", e);
+            }
+        }
+
+        if (err != null) err.println(val);
+        return val;
     }
 
     public static String getString() {
-        return in.nextLine();
+        String val = in.nextLine();
+        if (err != null) err.println(val);
+        return val;
     }
 }
