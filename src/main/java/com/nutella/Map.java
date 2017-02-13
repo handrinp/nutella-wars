@@ -35,6 +35,7 @@ public class Map {
     public static void goInside(int curLocation, User user) {
         if (curLocation == JAR_CENTRAL) {
         } else if (curLocation == JARENA) {
+            Jarena.goInside(user);
         } else if (curLocation == HAZELNUT_HOSPITAL) {
             Hospital.goInside(user);
         } else if (curLocation == SHOP) {
