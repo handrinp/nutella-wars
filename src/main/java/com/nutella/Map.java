@@ -63,3 +63,4 @@ public class Map {
         return curLocation;
     }
 }
+
