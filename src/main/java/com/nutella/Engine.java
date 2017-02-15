@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Engine {
@@ -27,6 +28,7 @@ public class Engine {
 
     private static Scanner in = null;
     private static PrintWriter err = null;
+    private static Random RNG = null;
 
     public static void main(String[] args) {
         openPrompt();
@@ -41,6 +43,7 @@ public class Engine {
     }
 
     private static void openPrompt() {
+        RNG = new Random();
         in = new Scanner(System.in);
 
         try {
@@ -172,6 +175,10 @@ public class Engine {
         String val = in.nextLine();
         if (err != null) err.println(val);
         return val;
+    }
+
+    public static int randInt(int low, int spread) {
+        return low + RNG.nextInt(spread);
     }
 }
 

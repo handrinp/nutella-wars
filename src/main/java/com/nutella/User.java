@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class User {
+    public static final String[] RANDOM_NAMES = {"JarOffensive", "JarDefensive", "JarMagical"};
+
     public String username;
     public int build;
     public int atk;
@@ -33,6 +35,23 @@ public class User {
         this.maxSP = SP;
         this.gold = gold;
         this.spells = spells;
+    }
+
+    public static User makeOpponent(int lv) {
+        int seed = Engine.randInt(0, 3);
+        int atkBonus = 0;
+        int defBonus = 0;
+
+        if (seed == Build.OFFENSIVE) {
+            atkBonus = 2;
+        } else if (seed == Build.DEFENSIVE) {
+            defBonus = 2;
+        } else if (seed == Build.MAGICAL) {
+            atkBonus = 1;
+            defBonus = 1;
+        }
+
+        return new User(RANDOM_NAMES[seed], seed, 5 + atkBonus, 2 + defBonus, 30, 1, 15, 0, 50, 0);
     }
 
     public void echoStats() {
