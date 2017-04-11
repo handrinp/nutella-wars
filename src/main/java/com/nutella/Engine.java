@@ -198,5 +198,9 @@ public class Engine {
     public static int randInt(int low, int spread) {
         return low + RNG.nextInt(spread);
     }
+
+    public static boolean randBool() {
+        return RNG.nextBoolean();
+    }
 }
 
