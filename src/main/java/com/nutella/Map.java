@@ -44,17 +44,21 @@ public class Map {
     }
 
     public static int travel(int curLocation) {
+        int len = Map.REACH[curLocation].length;
         Engine.echo("Travel where?");
+        Engine.echo("  (" + 0 + ") nowhere");
 
-        for (int i = 0; i < Map.REACH[curLocation].length; ++i) {
-            Engine.echo("  (" + i + ") " + Map.LOCATION[Map.REACH[curLocation][i]]);
+        for (int i = 1; i <= len; ++i) {
+            Engine.echo("  (" + i + ") " + Map.LOCATION[Map.REACH[curLocation][i - 1]]);
         }
 
         // parse input
         int choice = Engine.getInt();
 
-        if (choice > -1 && choice < LOCATION.length) {
-            curLocation = Map.REACH[curLocation][choice];
+        if (choice == 0) {
+            // do nothing - going nowhere
+        } else if (choice > 0 && choice <= len) {
+            curLocation = Map.REACH[curLocation][choice - 1];
         } else {
             Engine.error("you can't go there");
         }
