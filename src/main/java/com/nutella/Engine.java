@@ -18,6 +18,21 @@ public class Engine {
     private static final int GO_INSIDE   = 3;
     private static final int TRAVEL      = 4;
 
+    private static final String[] LOGO = {
+        "███╗   ██╗██╗   ██╗████████╗███████╗██╗     ██╗      █████╗ ",
+        "████╗  ██║██║   ██║╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗",
+        "██╔██╗ ██║██║   ██║   ██║   █████╗  ██║     ██║     ███████║",
+        "██║╚██╗██║██║   ██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║",
+        "██║ ╚████║╚██████╔╝   ██║   ███████╗███████╗███████╗██║  ██║",
+        "╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝",
+        "             ██╗    ██╗ █████╗ ██████╗ ███████╗",
+        "             ██║    ██║██╔══██╗██╔══██╗██╔════╝",
+        "             ██║ █╗ ██║███████║██████╔╝███████╗",
+        "             ██║███╗██║██╔══██║██╔══██╗╚════██║",
+        "             ╚███╔███╔╝██║  ██║██║  ██║███████║",
+        "              ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝"
+    };
+
     private static final String[] MENU_OPTIONS = {
         "Exit the game",
         "Check your stats",
@@ -58,7 +73,12 @@ public class Engine {
             error("could not open " + LOG_FILE + " for writing");
         }
 
-        Engine.echo("Welcome to Nutella Wars!");
+        Engine.echoLine();
+
+        for (int i = 0; i < LOGO.length; ++i) {
+            Engine.echo(LOGO[i]);
+        }
+
         Engine.echoLine();
     }
 
@@ -146,7 +166,7 @@ public class Engine {
 
     public static void echoLine() {
         echo();
-        echo("==================================================");
+        echo("============================================================");
         echo();
     }
 
