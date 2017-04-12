@@ -46,7 +46,7 @@ public class Map {
     public static int travel(int curLocation) {
         int len = Map.REACH[curLocation].length;
         Engine.echo("Travel where?");
-        Engine.echo("  (" + 0 + ") nowhere");
+        Engine.echo("  (" + 0 + ") Nowhere");
 
         for (int i = 1; i <= len; ++i) {
             Engine.echo("  (" + i + ") " + Map.LOCATION[Map.REACH[curLocation][i - 1]]);
@@ -60,7 +60,7 @@ public class Map {
         } else if (choice > 0 && choice <= len) {
             curLocation = Map.REACH[curLocation][choice - 1];
         } else {
-            Engine.error("you can't go there");
+            Engine.error("You can't go there");
         }
 
         Engine.echoLine();
