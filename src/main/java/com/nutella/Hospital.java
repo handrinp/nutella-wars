@@ -30,13 +30,12 @@ public class Hospital {
     private static void mainLoop(User user) {
         boolean loop = true;
         int choice;
-        int numOptions = MENU_OPTIONS.length;
 
         while (loop) {
             Engine.echo("You have " + user.gold + " gold left.");
             Engine.echo("What would you like to do?");
 
-            for (int i = 0; i < numOptions; ++i) {
+            for (int i = 0; i < MENU_OPTIONS.length; ++i) {
                 Engine.echo("  (" + i + ") " + MENU_OPTIONS[i]);
             }
 

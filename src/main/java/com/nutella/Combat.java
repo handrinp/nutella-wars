@@ -5,6 +5,12 @@ public class Combat {
     private static final int DEFEND = 1;
     private static final int SPELL  = 2;
 
+    private static final String[] MENU_OPTIONS = {
+        "Regular attack",
+        "Parry/defend",
+        "Use a special attack"
+    };
+
     private static boolean playerTurn;
 
     public static void doBattle(User player) {
@@ -38,7 +44,17 @@ public class Combat {
     }
 
     private static void doPlayerTurn(User player, User computer) {
-        // UI stuff
+        int choice;
+
+        // TODO: error checking
+        Engine.echo("What would you like to do?");
+
+        for (int i = 0; i < MENU_OPTIONS.length; ++i) {
+            Engine.echo("  (" + i + ") " + MENU_OPTIONS[i]);
+        }
+
+        choice = Engine.getInt();
+        Engine.echoLine();
     }
 
     private static void doComputerTurn(User player, User computer) {
