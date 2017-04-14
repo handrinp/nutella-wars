@@ -28,6 +28,14 @@ public class Combat {
                 doComputerTurn(player, computer);
             }
 
+            // fix stats
+            player.curDef = Math.max(player.curDef, 1);
+            player.curAtk = Math.max(player.curAtk, 1);
+            player.curHP = Math.max(player.curHP, 0);
+            computer.curDef = Math.max(computer.curDef, 1);
+            computer.curAtk = Math.max(computer.curAtk, 1);
+            computer.curHP = Math.max(computer.curHP, 0);
+
             playerTurn = !playerTurn;
             Engine.echoLine();
         }
@@ -43,6 +51,7 @@ public class Combat {
 
     private static void doPlayerTurn(User player, User computer) {
         int choice;
+        int d20 = Engine.randInt(1, 20);
 
         // TODO: error checking
         Engine.echo("What would you like to do?");
@@ -55,9 +64,19 @@ public class Combat {
         Engine.echoLine();
 
         if (choice == ATTACK) {
-            Engine.echo("ATTACK STUB");
+            if (d20 == 20) {
+                // crit
+            } else if (d20 > 2) {
+                // hit
+            } else {
+                // miss
+            }
         } else if (choice == DEFEND) {
-            Engine.echo("DEFEND STUB");
+            if (d20 == 20) {
+                // counter attack
+            } else {
+                // defend
+            }
         } else if (choice == SPELL) {
             Engine.echo("SPELL STUB");
         } else {

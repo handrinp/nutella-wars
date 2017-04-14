@@ -86,16 +86,18 @@ public class Shop {
                     Engine.echo("You can't afford that.");
                 } else {
                     user.gold -= ATK_COST;
-                    user.atk += ATK_VAL;
-                    Engine.echo("ATK increased to " + user.atk);
+                    user.maxAtk += ATK_VAL;
+                    user.curAtk += ATK_VAL;
+                    Engine.echo("ATK increased to " + user.maxAtk);
                 }
             } else if (choice == TRAIN_DEF) {
                 if (user.gold < DEF_COST) {
                     Engine.echo("You can't afford that.");
                 } else {
                     user.gold -= DEF_COST;
-                    user.def += DEF_VAL;
-                    Engine.echo("DEF increased to " + user.def);
+                    user.maxDef += DEF_VAL;
+                    user.curDef += DEF_VAL;
+                    Engine.echo("DEF increased to " + user.maxDef);
                 }
             } else if (user.lv > 1 && choice == TRAIN_SP) {
                 if (user.gold < SP_COST) {

@@ -10,8 +10,10 @@ public class User {
 
     public String username;
     public int build;
-    public int atk;
-    public int def;
+    public int curAtk;
+    public int maxAtk;
+    public int curDef;
+    public int maxDef;
     public int exp;
     public int lv;
     public int curHP;
@@ -25,8 +27,10 @@ public class User {
     private User(String username, int build, int atk, int def, int exp, int lv, int HP, int SP, int gold, int spells) {
         this.username = username;
         this.build = build;
-        this.atk = atk;
-        this.def = def;
+        this.curAtk = atk;
+        this.maxAtk = atk;
+        this.curDef = def;
+        this.maxDef = def;
         this.exp = exp;
         this.lv = lv;
         this.curHP = HP;
@@ -57,8 +61,8 @@ public class User {
     public void echoStats() {
         Engine.echo("Username: " + username);
         Engine.echo("Build: " + (build == Build.OFFENSIVE ? "OFFENSIVE" : (build == Build.DEFENSIVE ? "DEFENSIVE" : "MAGICAL")));
-        Engine.echo("Attack: " + atk);
-        Engine.echo("Defense: " + def);
+        Engine.echo("Attack: " + maxAtk);
+        Engine.echo("Defense: " + maxDef);
         Engine.echo("Experience: " + exp);
         Engine.echo("Level: " + lv);
         Engine.echo("HP: " + curHP + "/" + maxHP);
@@ -71,7 +75,7 @@ public class User {
     public void makeSaveFile() throws FileNotFoundException {
         File accountFile = fileFromUser(username);
         PrintWriter pw = new PrintWriter(accountFile);
-        pw.printf("%d %d %d %d %d %d %d %d %d%n", build, atk, def, exp, lv, maxHP, maxSP, gold, spells);
+        pw.printf("%d %d %d %d %d %d %d %d %d%n", build, maxAtk, maxDef, exp, lv, maxHP, maxSP, gold, spells);
         pw.close();
     }
 
