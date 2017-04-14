@@ -2,6 +2,9 @@ package com.nutella;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,8 +71,8 @@ public class Engine {
                 new PrintWriter(errFile).close();
             }
 
-            err = new PrintWriter(errFile);
-        } catch (FileNotFoundException e) {
+            err = new PrintWriter(new BufferedWriter(new FileWriter(errFile, true)));
+        } catch (IOException e) {
             error("could not open " + LOG_FILE + " for writing");
         }
 
