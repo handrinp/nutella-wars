@@ -35,11 +35,9 @@ public class Combat {
         if (computer.curHP == 0) {
             // win
             Engine.echo("You won!");
-            Engine.echoLine();
         } else {
             // lose
-            Engine.echo("You lost!");
-            Engine.echoLine();
+            Engine.echo("You browned out!");
         }
     }
 
@@ -55,10 +53,21 @@ public class Combat {
 
         choice = Engine.getInt();
         Engine.echoLine();
+
+        if (choice == ATTACK) {
+            Engine.echo("ATTACK STUB");
+        } else if (choice == DEFEND) {
+            Engine.echo("DEFEND STUB");
+        } else if (choice == SPELL) {
+            Engine.echo("SPELL STUB");
+        } else {
+            Engine.error("that wasn't an option");
+            Engine.echoLine();
+            doPlayerTurn(player, computer);
+        }
     }
 
     private static void doComputerTurn(User player, User computer) {
-        // AI stuff
         computer.curHP = 0;
     }
 
