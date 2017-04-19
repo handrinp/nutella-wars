@@ -28,13 +28,8 @@ public class Combat {
                 doComputerTurn(player, computer);
             }
 
-            // fix stats
-            player.curDef = Math.max(player.curDef, 1);
-            player.curAtk = Math.max(player.curAtk, 1);
-            player.curHP = Math.max(player.curHP, 0);
-            computer.curDef = Math.max(computer.curDef, 1);
-            computer.curAtk = Math.max(computer.curAtk, 1);
-            computer.curHP = Math.max(computer.curHP, 0);
+            fixStats(player);
+            fixStats(computer);
 
             playerTurn = !playerTurn;
             Engine.echoLine();
@@ -49,9 +44,17 @@ public class Combat {
         }
     }
 
+    private static void fixStats(User user) {
+        user.curDef = Math.max(user.curDef, 1);
+        user.curAtk = Math.max(user.curAtk, 1);
+        user.curHP = Math.max(user.curHP, 0);
+    }
+
     private static void doPlayerTurn(User player, User computer) {
         int choice;
-        int d20 = Engine.randInt(1, 20);
+        int damage = 0;
+        int defBonus = 0;
+        int d20 = Engine.randInt(1, 19);
 
         // TODO: error checking
         Engine.echo("What would you like to do?");
@@ -63,19 +66,29 @@ public class Combat {
         choice = Engine.getInt();
         Engine.echoLine();
 
+
         if (choice == ATTACK) {
+            Engine.echo("You lunge your jar at the foe...");
+
             if (d20 == 20) {
                 // crit
-            } else if (d20 > 2) {
+                Engine.echo("Your attack hit a weak spot!");
+                damage = player.curAtk + 3;
+            } else if (d20 > 4) {
                 // hit
+                damage = Engine.randInt(3, player.curAtk);
             } else {
                 // miss
+                Engine.echo("You miss!");
             }
         } else if (choice == DEFEND) {
-            if (d20 == 20) {
+            Engine.echo("You take a defensive stance");
+            defBonus = 1;
+
+            if (d20 > 18) {
                 // counter attack
-            } else {
-                // defend
+                Engine.echo("Psych! You counterattack and then take a defensive stance.");
+                damage = 1;
             }
         } else if (choice == SPELL) {
             Engine.echo("SPELL STUB");
@@ -84,10 +97,21 @@ public class Combat {
             Engine.echoLine();
             doPlayerTurn(player, computer);
         }
+
+        if (damage > 0) {
+            damage = Math.max(1, damage - computer.curDef);
+            Engine.echo("You deal " + damage + " damage!");
+            computer.curHP -= damage;
+        }
+
+        if (defBonus > 0) {
+            Engine.echo("Your defense increases by " + defBonus + ".");
+            player.curDef += defBonus;
+        }
     }
 
     private static void doComputerTurn(User player, User computer) {
-        computer.curHP = 0;
+        Engine.echo("STUBBED OUT COMPUTER TURN");
     }
 
     private static void echoScoreboard(User player, User computer) {
