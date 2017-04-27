@@ -55,6 +55,11 @@
         </dependency>
     </dependencies>
 
+    <!-- Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <!-- Project info -->
     <name>Nutella Wars</name>
     <description>A remake of my hit classic VBS game, Nutella Wars! (okay, maybe it never was a hit...)</description>
