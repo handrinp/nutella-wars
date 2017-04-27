@@ -13,7 +13,8 @@ public class Combat {
 
     private static boolean playerTurn;
 
-    public static void doBattle(User player) {
+    public static boolean doBattle(User player) {
+        boolean won = false;
         User computer = User.makeOpponent(player.lv);
         playerTurn = Engine.randBool();
 
@@ -34,10 +35,12 @@ public class Combat {
         }
 
         if (computer.curHP == 0) {
+            won = true;
             doWin(player, computer);
-        } else {
-            doLose(player, computer);
         }
+
+        doLose(player);
+        return won;
     }
 
     private static void doWin(User player, User computer) {
@@ -58,8 +61,10 @@ public class Combat {
         player.checkForLevelUp();
     }
 
-    private static void doLose(User player, User computer) {
+    private static void doLose(User player) {
         Engine.echo("You browned out!");
+        Engine.teleport(Map.HAZELNUT_HOSPITAL);
+        Hospital.getHealed(player);
     }
 
     private static void fixStats(User user) {
@@ -130,6 +135,7 @@ public class Combat {
 
     private static void doComputerTurn(User player, User computer) {
         Engine.echo("STUBBED OUT COMPUTER TURN");
+        player.curHP = 0;
     }
 
     private static void echoScoreboard(User player, User computer) {

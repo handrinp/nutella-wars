@@ -49,7 +49,7 @@ public class Jarena {
                 Engine.echo("Here you can battle all sorts of scary jars.");
                 Engine.echo("After being matched up with a foe, you fight jar-to-jar until one emerges victorious.");
             } else if (choice == DO_BATTLE) {
-                Combat.doBattle(user);
+                loop = Combat.doBattle(user);
             } else {
                 Engine.error("that wasn't an option");
             }

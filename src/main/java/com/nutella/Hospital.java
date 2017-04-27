@@ -49,14 +49,18 @@ public class Hospital {
                 Engine.echo("Many jars get damaged or broken in the Jarena.");
                 Engine.echo("Here you can heal your jar.");
             } else if (choice == GET_HEALED) {
-                user.curHP = user.maxHP;
-                Engine.echo("You have been healed to full health.");
+                getHealed(user);
             } else {
                 Engine.error("that wasn't an option");
             }
 
             if (choice != GO_OUTSIDE) Engine.echoLine();
         }
+    }
+
+    public static void getHealed(User player) {
+        player.curHP = player.maxHP;
+        Engine.echo("You have been healed to full health.");
     }
 }
 
