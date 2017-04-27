@@ -41,6 +41,10 @@ public class User {
         this.spells = spells;
     }
 
+    public void checkForLevelUp() {
+        Engine.echo("STUBBED OUT LEVEL UP CHECK");
+    }
+
     public static User makeOpponent(int lv) {
         int seed = Engine.randInt(0, 3);
         int atkBonus = 0;

@@ -21,10 +21,8 @@ public class Combat {
             echoScoreboard(player, computer);
 
             if (playerTurn) {
-                Engine.echo("Player turn");
                 doPlayerTurn(player, computer);
             } else {
-                Engine.echo("Computer turn");
                 doComputerTurn(player, computer);
             }
 
@@ -36,12 +34,32 @@ public class Combat {
         }
 
         if (computer.curHP == 0) {
-            // win
-            Engine.echo("You won!");
+            doWin(player, computer);
         } else {
-            // lose
-            Engine.echo("You browned out!");
+            doLose(player, computer);
         }
+    }
+
+    private static void doWin(User player, User computer) {
+        Engine.echo("You won!");
+
+        // gold reward
+        player.gold += computer.gold;
+        String goldLine = String.format("You got %d gold for winning.", computer.gold);
+        Engine.echo(goldLine);
+
+        // exp reward
+        int expBonus = Engine.randInt(50, 50);
+        player.exp += expBonus;
+        String expLine = String.format("You got %d exp for winning.", expBonus);
+        Engine.echo(expLine);
+
+        // check for level up
+        player.checkForLevelUp();
+    }
+
+    private static void doLose(User player, User computer) {
+        Engine.echo("You browned out!");
     }
 
     private static void fixStats(User user) {
@@ -121,14 +139,6 @@ public class Combat {
                 player.curSP, player.maxSP, computer.curSP, computer.maxSP);
         Engine.echo(hpLine);
         Engine.echo(spLine);
-    }
-
-    private static boolean didWin(User player, User computer) {
-        return computer.curHP == 0 && player.curHP > 0;
-    }
-
-    private static boolean didLose(User player, User computer) {
-        return player.curHP == 0 && computer.curHP > 0;
     }
 }
 
