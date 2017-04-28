@@ -37,9 +37,10 @@ public class Combat {
         if (computer.curHP == 0) {
             won = true;
             doWin(player, computer);
+        } else {
+            doLose(player);
         }
 
-        doLose(player);
         return won;
     }
 
@@ -63,6 +64,7 @@ public class Combat {
 
     private static void doLose(User player) {
         Engine.echo("You browned out!");
+        Engine.echo("You've been carried to the hospital.");
         Engine.teleport(Map.HAZELNUT_HOSPITAL);
         Hospital.getHealed(player);
     }
@@ -134,8 +136,62 @@ public class Combat {
     }
 
     private static void doComputerTurn(User player, User computer) {
-        Engine.echo("STUBBED OUT COMPUTER TURN");
-        player.curHP = 0;
+        int magicThreshold = computer.build == Build.MAGICAL ? 13 : 17;
+        int damage = 0;
+        int defBonus = 0;
+        int choice;
+
+        // roll for turn choice
+        int d20 = Engine.randInt(1, 19);
+
+        if (d20 < 11) {
+            choice = ATTACK;
+        } else if (d20 > magicThreshold) {
+            choice = SPELL;
+        } else {
+            choice = DEFEND;
+        }
+
+        // reroll for choice calculation
+        d20 = Engine.randInt(1, 19);
+
+        if (choice == ATTACK) {
+            Engine.echo("Your foe lunges their jar at you...");
+
+            if (d20 == 20) {
+                // crit
+                Engine.echo("Their attack hit a weak spot!");
+                damage = computer.curAtk + 3;
+            } else if (d20 > 4) {
+                // hit
+                damage = Engine.randInt(3, computer.curAtk);
+            } else {
+                // miss
+                Engine.echo("They miss!");
+            }
+        } else if (choice == DEFEND) {
+            Engine.echo("They take a defensive stance");
+            defBonus = 1;
+
+            if (d20 > 18) {
+                // counter attack
+                Engine.echo("Psych! They counterattack and then take a defensive stance.");
+                damage = 1;
+            }
+        } else {
+            Engine.echo("SPELL STUB");
+        }
+
+        if (damage > 0) {
+            damage = Math.max(1, damage - player.curDef);
+            Engine.echo("They deal " + damage + " damage!");
+            player.curHP -= damage;
+        }
+
+        if (defBonus > 0) {
+            Engine.echo("Their defense increases by " + defBonus + ".");
+            computer.curDef += defBonus;
+        }
     }
 
     private static void echoScoreboard(User player, User computer) {
