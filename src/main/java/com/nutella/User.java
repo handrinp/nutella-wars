@@ -83,6 +83,10 @@ public class User {
         pw.close();
     }
 
+    public boolean hasSpell(int spell) {
+        return (spells & spell) == spell;
+    }
+
     private static File fileFromUser(String username) {
         File accountsDir = new File("accounts");
 
