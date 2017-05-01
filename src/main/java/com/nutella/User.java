@@ -65,6 +65,61 @@ public class User {
         }
     }
 
+    public void cast(int spell, User target) {
+        int cost = Spells.cost(spell);
+
+        if (hasSpell(spell) && curSP > cost) {
+            int damage = 0;
+            int oldAtk = curAtk;
+            curSP -= cost;
+
+            if (spell == Spells.SLAM) {
+                Engine.echo("SLAM was cast");
+                curAtk = (curAtk + (curAtk << 1)) >> 1;
+
+                if (d20 == 20) {
+                    // crit
+                    Engine.echo("The attack hit a weak spot!");
+                    damage = curAtk + 3;
+                } else if (d20 > 4) {
+                    // hit
+                    damage = Engine.randInt(3, curAtk);
+                } else {
+                    // miss
+                    Engine.echo("It misses!");
+                }
+            } else if (spell == Spells.BARRAGE) {
+                Engine.echo("BARRAGE was cast");
+
+                for (int i = 0; i < 3; ++i) {
+                    int d20 = Engine.randInt(1, 19);
+
+                    if (d20 == 20) {
+                        // crit
+                        Engine.echo("The attack hit a weak spot!");
+                        damage = curAtk + 3;
+                    } else if (d20 > 4) {
+                        // hit
+                        damage = Engine.randInt(3, curAtk);
+                    } else {
+                        // miss
+                        Engine.echo("It misses!");
+                    }
+                }
+            } else if (spell == Spells.PUMMEL) {
+            } else if (spell == Spells.HARDEN) {
+            }
+
+            if (damage > 0) {
+                damage = Math.max(1, damage - target.curDef);
+                Engine.echo(damage + " damage dealt!");
+                target.curHP -= damage;
+            }
+
+            curAtk = oldAtk;
+        }
+    }
+
     public static User makeOpponent(int lv) {
         int seed = Engine.randInt(0, 3);
         int hpBonus = lv << 2;
