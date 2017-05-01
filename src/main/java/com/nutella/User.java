@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class User {
     public static final String[] RANDOM_NAMES = {"JarOffensive", "JarDefensive", "JarMagical"};
+    public static final int[] EXP = {83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107, 2411};
 
     public String username;
     public int build;
@@ -42,24 +43,47 @@ public class User {
     }
 
     public void checkForLevelUp() {
-        Engine.echo("STUBBED OUT LEVEL UP CHECK");
+        boolean levelledUp = false;
+
+        while (exp > EXP[lv - 1]) {
+            ++lv;
+            levelledUp = true;
+
+            if (build == Build.OFFENSIVE) {
+                ++maxAtk;
+            } else if (build == Build.DEFENSIVE) {
+                ++maxDef;
+            } else if (build == Build.MAGICAL) {
+                maxSP += 4;
+            }
+
+            maxSP += 4;
+        }
+
+        if (levelledUp) {
+            Engine.echo("Congrats! You are now level " + lv);
+        }
     }
 
     public static User makeOpponent(int lv) {
         int seed = Engine.randInt(0, 3);
+        int hpBonus = lv << 2;
         int atkBonus = 0;
         int defBonus = 0;
+        int spBonus = 0;
+        int expBonus = lv << 5;
 
         if (seed == Build.OFFENSIVE) {
-            atkBonus = 2;
+            atkBonus = 2 + lv;
         } else if (seed == Build.DEFENSIVE) {
-            defBonus = 2;
+            defBonus = (2 + lv) >> 1;
         } else if (seed == Build.MAGICAL) {
-            atkBonus = 1;
-            defBonus = 1;
+            atkBonus = (1 + lv) >> 1;
+            defBonus = (1 + lv) >> 1;
+            spBonus = lv << 2;
         }
 
-        return new User(RANDOM_NAMES[seed], seed, 5 + atkBonus, 2 + defBonus, 30, 1, 15, 0, 50, 0);
+        return new User(RANDOM_NAMES[seed], seed, 5 + atkBonus, 2 + defBonus, expBonus, lv, 10 + hpBonus, spBonus, 50, 0);
     }
 
     public void echoStats() {

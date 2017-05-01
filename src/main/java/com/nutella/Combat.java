@@ -53,7 +53,7 @@ public class Combat {
         Engine.echo(goldLine);
 
         // exp reward
-        int expBonus = Engine.randInt(50, 50);
+        int expBonus = Engine.randInt(computer.exp, 15);
         player.exp += expBonus;
         String expLine = String.format("You got %d exp for winning.", expBonus);
         Engine.echo(expLine);
