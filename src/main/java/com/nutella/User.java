@@ -49,8 +49,22 @@ public class User {
             ++lv;
             levelledUp = true;
 
+            if (levelledUp) {
+                Engine.echo("Congrats! You are now level " + lv);
+            }
+
             if (build == Build.OFFENSIVE) {
                 ++maxAtk;
+                if (lv == 2) {
+                    learnSpell(Spells.SLAM);
+                    Engine.echo("You learned the spell SLAM");
+                } else if (lv == 4) {
+                    learnSpell(Spells.BARRAGE);
+                    Engine.echo("You learned the spell BARRAGE");
+                } else if (lv == 6) {
+                    learnSpell(Spells.PUMMEL);
+                    Engine.echo("You learned the spell PUMMEL");
+                }
             } else if (build == Build.DEFENSIVE) {
                 ++maxDef;
             } else if (build == Build.MAGICAL) {
@@ -59,14 +73,15 @@ public class User {
 
             maxSP += 4;
         }
+    }
 
-        if (levelledUp) {
-            Engine.echo("Congrats! You are now level " + lv);
-        }
+    public void learnSpell(int spell) {
+        spells ^= spell;
     }
 
     public void cast(int spell, User target) {
         int cost = Spells.cost(spell);
+        int d20 = Engine.randInt(1, 19);
 
         if (hasSpell(spell) && curSP > cost) {
             int damage = 0;
@@ -92,7 +107,7 @@ public class User {
                 Engine.echo("BARRAGE was cast");
 
                 for (int i = 0; i < 3; ++i) {
-                    int d20 = Engine.randInt(1, 19);
+                    d20 = Engine.randInt(1, 19);
 
                     if (d20 == 20) {
                         // crit
