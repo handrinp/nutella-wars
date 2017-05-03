@@ -59,6 +59,7 @@ public class Hospital {
 
     public static void getHealed(User player) {
         player.curHP = player.maxHP;
+        player.curSP = player.maxSP;
         Engine.echo("You have been healed to full health.");
     }
 }
