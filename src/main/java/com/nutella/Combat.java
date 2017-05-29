@@ -1,5 +1,7 @@
 package com.nutella;
 
+import com.nutella.place.Hospital;
+
 public class Combat {
     private static final int ATTACK = 0;
     private static final int DEFEND = 1;

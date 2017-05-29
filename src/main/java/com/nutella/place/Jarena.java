@@ -1,33 +1,38 @@
-package com.nutella;
+package com.nutella.place;
 
-public class Hospital implements Location {
-    private static Hospital instance = null;
+import com.nutella.Combat;
+import com.nutella.Engine;
+import com.nutella.Location;
+import com.nutella.User;
+
+public class Jarena implements Location {
+    private static Jarena instance = null;
 
     private Location[] reach = null;
 
-    private Hospital() {}
+    private Jarena() {}
 
     public String getName() {
-        return "Hazelnut Hospital";
+        return "Jarena";
     }
 
     public String getInfo() {
-        return "Is your jar all cracked up? Are you running low on SP? Nurse Jar can help!";
+        return "Spreads from all over the shelf come here to duke it out. Will you be vicjarious?";
     }
 
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
-    private static final int GET_HEALED = 2;
+    private static final int DO_BATTLE  = 2;
 
     private static final String[] MENU_OPTIONS = {
         "Go outside",
-        "Learn more about the Hazelnut Hospital",
-        "Heal your jar"
+        "Learn more about the Jarena",
+        "Battle"
     };
 
-    public static Hospital getInstance() {
+    public static Jarena getInstance() {
         if (instance == null) {
-            instance = new Hospital();
+            instance = new Jarena();
         }
 
         return instance;
@@ -40,23 +45,24 @@ public class Hospital implements Location {
     }
 
     public void openPrompt() {
-        Engine.echo("Welcome to the Hazelnut Hospital.");
+        Engine.echo("Welcome to the Jarena.");
         Engine.echoLine();
     }
 
     public void closePrompt() {
-        Engine.echo("Good luck out there!");
+        Engine.echo("We hope to see you again, brave jar.");
         Engine.echoLine();
     }
 
     public void mainLoop(User user) {
         boolean loop = true;
         int choice;
+        int numOptions = MENU_OPTIONS.length;
 
         while (loop) {
             Engine.echo("What would you like to do?");
 
-            for (int i = 0; i < MENU_OPTIONS.length; ++i) {
+            for (int i = 0; i < numOptions; ++i) {
                 Engine.echo("  (" + i + ") " + MENU_OPTIONS[i]);
             }
 
@@ -67,10 +73,10 @@ public class Hospital implements Location {
             if (choice == GO_OUTSIDE) {
                 loop = false;
             } else if (choice == GET_INFO) {
-                Engine.echo("Many jars get damaged or broken in the Jarena.");
-                Engine.echo("Here you can heal your jar.");
-            } else if (choice == GET_HEALED) {
-                getHealed(user);
+                Engine.echo("Here you can battle all sorts of scary jars.");
+                Engine.echo("After being matched up with a foe, you fight jar-to-jar until one emerges victorious.");
+            } else if (choice == DO_BATTLE) {
+                loop = Combat.doBattle(user);
             } else {
                 Engine.error("that wasn't an option");
             }
@@ -79,17 +85,11 @@ public class Hospital implements Location {
         }
     }
 
-    public static void getHealed(User player) {
-        player.curHP = player.maxHP;
-        player.curSP = player.maxSP;
-        Engine.echo("You have been healed to full health.");
-    }
-
     public Location[] getReach() {
         if (reach == null) {
             reach = new Location[] {
                 JarCentral.getInstance(),
-                Jarena.getInstance()
+                Hospital.getInstance()
             };
         }
 

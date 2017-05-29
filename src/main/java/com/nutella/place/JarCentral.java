@@ -1,4 +1,8 @@
-package com.nutella;
+package com.nutella.place;
+
+import com.nutella.Engine;
+import com.nutella.Location;
+import com.nutella.User;
 
 public class JarCentral implements Location {
     public static JarCentral instance = null;

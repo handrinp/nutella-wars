@@ -1,5 +1,7 @@
 package com.nutella;
 
+import com.nutella.place.JarCentral;
+
 public class Map {
     public static Map instance = null;
 
