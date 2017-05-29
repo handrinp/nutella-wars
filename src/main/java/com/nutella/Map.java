@@ -35,11 +35,11 @@ public class Map {
     public static void goInside(int curLocation, User user) {
         if (curLocation == JAR_CENTRAL) {
         } else if (curLocation == JARENA) {
-            Jarena.goInside(user);
+            Jarena.getInstance().goInside(user);
         } else if (curLocation == HAZELNUT_HOSPITAL) {
-            Hospital.goInside(user);
+            Hospital.getInstance().goInside(user);
         } else if (curLocation == SHOP) {
-            Shop.goInside(user);
+            Shop.getInstance().goInside(user);
         }
     }
 

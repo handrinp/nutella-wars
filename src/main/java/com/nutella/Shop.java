@@ -1,6 +1,8 @@
 package com.nutella;
 
-public class Shop {
+public class Shop implements Location {
+    private static Shop instance = null;
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int TRAIN_HP   = 2;
@@ -29,23 +31,31 @@ public class Shop {
         "[" + SP_COST  + " gold] - Train SP"
     };
 
-    public static void goInside(User user) {
+    public static Shop getInstance() {
+        if (instance == null) {
+            instance = new Shop();
+        }
+
+        return instance;
+    }
+
+    public void goInside(User user) {
         openPrompt();
         mainLoop(user);
         closePrompt();
     }
 
-    private static void openPrompt() {
+    public void openPrompt() {
         Engine.echo("Welcome to the shop.");
         Engine.echoLine();
     }
 
-    private static void closePrompt() {
+    public void closePrompt() {
         Engine.echo("Come again soon!");
         Engine.echoLine();
     }
 
-    private static void mainLoop(User user) {
+    public void mainLoop(User user) {
         boolean loop = true;
         int choice;
         int numOptions = MENU_OPTIONS.length;

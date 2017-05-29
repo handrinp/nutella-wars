@@ -1,6 +1,8 @@
 package com.nutella;
 
-public class Hospital {
+public class Hospital implements Location {
+    private static Hospital instance = null;
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int GET_HEALED = 2;
@@ -11,23 +13,31 @@ public class Hospital {
         "Heal your jar"
     };
 
-    public static void goInside(User user) {
+    public static Hospital getInstance() {
+        if (instance == null) {
+            instance = new Hospital();
+        }
+
+        return instance;
+    }
+
+    public void goInside(User user) {
         openPrompt();
         mainLoop(user);
         closePrompt();
     }
 
-    private static void openPrompt() {
+    public void openPrompt() {
         Engine.echo("Welcome to the Hazelnut Hospital.");
         Engine.echoLine();
     }
 
-    private static void closePrompt() {
+    public void closePrompt() {
         Engine.echo("Good luck out there!");
         Engine.echoLine();
     }
 
-    private static void mainLoop(User user) {
+    public void mainLoop(User user) {
         boolean loop = true;
         int choice;
 

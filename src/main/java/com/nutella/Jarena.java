@@ -1,6 +1,8 @@
 package com.nutella;
 
-public class Jarena {
+public class Jarena implements Location {
+    private static Jarena instance = null;
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int DO_BATTLE  = 2;
@@ -11,23 +13,31 @@ public class Jarena {
         "Battle"
     };
 
-    public static void goInside(User user) {
+    public static Jarena getInstance() {
+        if (instance == null) {
+            instance = new Jarena();
+        }
+
+        return instance;
+    }
+
+    public void goInside(User user) {
         openPrompt();
         mainLoop(user);
         closePrompt();
     }
 
-    private static void openPrompt() {
+    public void openPrompt() {
         Engine.echo("Welcome to the Jarena.");
         Engine.echoLine();
     }
 
-    private static void closePrompt() {
+    public void closePrompt() {
         Engine.echo("We hope to see you again, brave jar.");
         Engine.echoLine();
     }
 
-    private static void mainLoop(User user) {
+    public void mainLoop(User user) {
         boolean loop = true;
         int choice;
         int numOptions = MENU_OPTIONS.length;
