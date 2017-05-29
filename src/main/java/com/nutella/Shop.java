@@ -3,6 +3,18 @@ package com.nutella;
 public class Shop implements Location {
     private static Shop instance = null;
 
+    private Location[] reach = null;
+
+    private Shop() {}
+
+    public String getName() {
+        return "Shop";
+    }
+
+    public String getInfo() {
+        return "This is no ordinary shop. With gold, you can upgrade any of your stats!";
+    }
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int TRAIN_HP   = 2;
@@ -124,6 +136,16 @@ public class Shop implements Location {
 
             if (choice != GO_OUTSIDE) Engine.echoLine();
         }
+    }
+
+    public Location[] getReach() {
+        if (reach == null) {
+            reach = new Location[] {
+                JarCentral.getInstance()
+            };
+        }
+
+        return reach;
     }
 }
 

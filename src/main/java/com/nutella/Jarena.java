@@ -3,6 +3,18 @@ package com.nutella;
 public class Jarena implements Location {
     private static Jarena instance = null;
 
+    private Location[] reach = null;
+
+    private Jarena() {}
+
+    public String getName() {
+        return "Jarena";
+    }
+
+    public String getInfo() {
+        return "Spreads from all over the shelf come here to duke it out. Will you be vicjarious?";
+    }
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int DO_BATTLE  = 2;
@@ -66,6 +78,17 @@ public class Jarena implements Location {
 
             if (choice != GO_OUTSIDE) Engine.echoLine();
         }
+    }
+
+    public Location[] getReach() {
+        if (reach == null) {
+            reach = new Location[] {
+                JarCentral.getInstance(),
+                Hospital.getInstance()
+            };
+        }
+
+        return reach;
     }
 }
 

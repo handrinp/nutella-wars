@@ -3,6 +3,18 @@ package com.nutella;
 public class Hospital implements Location {
     private static Hospital instance = null;
 
+    private Location[] reach = null;
+
+    private Hospital() {}
+
+    public String getName() {
+        return "Hazelnut Hospital";
+    }
+
+    public String getInfo() {
+        return "Is your jar all cracked up? Are you running low on SP? Nurse Jar can help!";
+    }
+
     private static final int GO_OUTSIDE = 0;
     private static final int GET_INFO   = 1;
     private static final int GET_HEALED = 2;
@@ -71,6 +83,17 @@ public class Hospital implements Location {
         player.curHP = player.maxHP;
         player.curSP = player.maxSP;
         Engine.echo("You have been healed to full health.");
+    }
+
+    public Location[] getReach() {
+        if (reach == null) {
+            reach = new Location[] {
+                JarCentral.getInstance(),
+                Jarena.getInstance()
+            };
+        }
+
+        return reach;
     }
 }
 

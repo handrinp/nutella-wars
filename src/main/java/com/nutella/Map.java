@@ -1,24 +1,18 @@
 package com.nutella;
 
 public class Map {
+    public static Map instance = null;
+
+    private Location location = null;
+
+    private Map() {
+        location = JarCentral.getInstance();
+    }
+
     public static final int JAR_CENTRAL = 0;
     public static final int JARENA = 1;
     public static final int HAZELNUT_HOSPITAL = 2;
     public static final int SHOP = 3;
-
-    public static final String[] LOCATION = {
-        "Jar Central",
-        "Jarena",
-        "Hazelnut Hospital",
-        "Shop"
-    };
-
-    public static final String[] INFO = {
-        "You can reach most places from here - wherever your jar desires.",
-        "Spreads from all over the shelf come here to duke it out. Will you be vicjarious?",
-        "Is your jar all cracked up? Are you running low on SP? Nurse Jar can help!",
-        "This is no ordinary shop. With gold, you can upgrade any of your stats!"
-    };
 
     public static final int[][] REACH = {
         {1,2,3},
@@ -27,29 +21,34 @@ public class Map {
         {0}
     };
 
-    public static void echoInfo(int curLocation) {
-        Engine.echo(Map.INFO[curLocation]);
+    public static Map getInstance() {
+        if (instance == null) {
+            instance = new Map();
+        }
+
+        return instance;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void echoInfo() {
+        Engine.echo(location.getInfo());
         Engine.echoLine();
     }
 
-    public static void goInside(int curLocation, User user) {
-        if (curLocation == JAR_CENTRAL) {
-        } else if (curLocation == JARENA) {
-            Jarena.getInstance().goInside(user);
-        } else if (curLocation == HAZELNUT_HOSPITAL) {
-            Hospital.getInstance().goInside(user);
-        } else if (curLocation == SHOP) {
-            Shop.getInstance().goInside(user);
-        }
+    public void goInside(User user) {
+        location.goInside(user);
     }
 
-    public static int travel(int curLocation) {
-        int len = Map.REACH[curLocation].length;
+    public void travel() {
+        Location[] reach = location.getReach();
         Engine.echo("Travel where?");
         Engine.echo("  (" + 0 + ") Nowhere");
 
-        for (int i = 1; i <= len; ++i) {
-            Engine.echo("  (" + i + ") " + Map.LOCATION[Map.REACH[curLocation][i - 1]]);
+        for (int i = 1; i <= reach.length; ++i) {
+            Engine.echo("  (" + i + ") " + reach[i - 1].getName());
         }
 
         // parse input
@@ -57,14 +56,13 @@ public class Map {
 
         if (choice == 0) {
             // do nothing - going nowhere
-        } else if (choice > 0 && choice <= len) {
-            curLocation = Map.REACH[curLocation][choice - 1];
+        } else if (choice > 0 && choice <= reach.length) {
+            location = reach[choice - 1];
         } else {
             Engine.error("You can't go there");
         }
 
         Engine.echoLine();
-        return curLocation;
     }
 }
 

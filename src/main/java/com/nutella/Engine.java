@@ -94,12 +94,12 @@ public class Engine {
 
     private static void mainLoop(User user) {
         boolean loop = true;
-        curLocation = 0;
         int choice;
+        Map map = Map.getInstance();
 
         while (loop) {
             // print where you are
-            echo("Location: " + Map.LOCATION[curLocation]);
+            echo("Location: " + map.getLocation().getName());
 
             // print your options
             echo("What would you like to do?");
@@ -117,11 +117,11 @@ public class Engine {
             } else if (choice == CHECK_STATS) {
                 user.echoStats();
             } else if (choice == GET_INFO) {
-                Map.echoInfo(curLocation);
+                map.echoInfo();
             } else if (choice == GO_INSIDE) {
-                Map.goInside(curLocation, user);
+                map.goInside(user);
             } else if (choice == TRAVEL) {
-                curLocation = Map.travel(curLocation);
+                map.travel();
             } else {
                 error("that wasn't an option");
             }
