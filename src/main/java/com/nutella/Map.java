@@ -35,6 +35,10 @@ public class Map {
         return location;
     }
 
+    public void setLocation(Location newLocation) {
+        location = newLocation;
+    }
+
     public void echoInfo() {
         Engine.echo(location.getInfo());
         Engine.echoLine();

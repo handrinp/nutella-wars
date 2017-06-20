@@ -47,7 +47,6 @@ public class Engine {
     private static Scanner in = null;
     private static PrintWriter err = null;
     private static Random RNG = null;
-    private static int curLocation;
 
     public static void main(String[] args) {
         openPrompt();
@@ -126,10 +125,6 @@ public class Engine {
                 error("that wasn't an option");
             }
         }
-    }
-
-    public static void teleport(int location) {
-        curLocation = location;
     }
 
     private static void endSession(User user) {

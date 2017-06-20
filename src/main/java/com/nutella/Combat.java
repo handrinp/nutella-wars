@@ -67,7 +67,7 @@ public class Combat {
     private static void doLose(User player) {
         Engine.echo("You browned out!");
         Engine.echo("You've been carried to the hospital.");
-        Engine.teleport(Map.HAZELNUT_HOSPITAL);
+        Map.getInstance().setLocation(Hospital.getInstance());
         Hospital.getHealed(player);
     }
 
