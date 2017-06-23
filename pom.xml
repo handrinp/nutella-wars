@@ -10,7 +10,7 @@
 
     <!-- Build settings -->
     <build>
-        <defaultGoal>install</defaultGoal>
+        <defaultGoal>package</defaultGoal>
         <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
         <outputDirectory>${project.basedir}/target/classes</outputDirectory>
         <directory>${project.basedir}/target</directory>
