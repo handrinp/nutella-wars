@@ -1,3 +1,32 @@
-/accounts
-/target
-/nutella.log
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+target/*
+
+# External tool builders
+.externalToolBuilders/
+
+# Java annotation processor (APT)
+.factorypath
+
+# sbteclipse plugin
+.target
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Game data files
+accounts
+nutella.log
+
