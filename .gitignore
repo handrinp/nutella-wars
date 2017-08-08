@@ -9,7 +9,6 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-target/*
 
 # External tool builders
 .externalToolBuilders/
@@ -30,3 +29,4 @@ target/*
 accounts
 nutella.log
 
+/target/
