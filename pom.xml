@@ -1,77 +1,76 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Basics -->
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nutella</groupId>
-    <artifactId>nutella-wars</artifactId>
-    <version>1.0</version>
+	<!-- Basics -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.nutella</groupId>
+	<artifactId>nutella-wars</artifactId>
+	<version>1.0</version>
 
-    <!-- Build settings -->
-    <build>
-        <defaultGoal>package</defaultGoal>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <outputDirectory>${project.basedir}/target/classes</outputDirectory>
-        <directory>${project.basedir}/target</directory>
-        <finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/java</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.nutella.Engine</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<!-- Build settings -->
+	<build>
+		<defaultGoal>package</defaultGoal>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<outputDirectory>${project.basedir}/target/classes</outputDirectory>
+		<directory>${project.basedir}/target</directory>
+		<finalName>${project.artifactId}</finalName>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/java</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.nutella.Engine</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-    <!-- Dependencies -->
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-    <!-- Properties -->
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<!-- Properties -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <!-- Project info -->
-    <name>Nutella Wars</name>
-    <description>A remake of my hit classic VBS game, Nutella Wars! (okay, maybe it never was a hit...)</description>
-    <developers>
-        <developer>
-            <id>handrinp</id>
-            <name>Nick Handrick</name>
-            <email>handrinp@uwec.edu</email>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
+	<!-- Project info -->
+	<name>Nutella Wars</name>
+	<description>A remake of my hit classic VBS game, Nutella Wars! (okay, maybe it never was a hit...)</description>
+	<developers>
+		<developer>
+			<id>handrinp</id>
+			<name>Nick Handrick</name>
+			<email>handrinp@uwec.edu</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
 </project>
