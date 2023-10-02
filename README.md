@@ -10,10 +10,10 @@ Table of Contents
     - [Hazelnut Hospital](#hazelnut-hospital)
     - [Shop](#shop)
     - [jarena](#jarena)
-4. [Dependencies](#dependencies)
+5. [Dependencies](#dependencies)
     - [Setting Up Apache Maven](#setting-up-apache-maven)
-5. [Building](#building)
-6. [Running](#running)
+6. [Building](#building)
+7. [Running](#running)
 
 About
 -----
