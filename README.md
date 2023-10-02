@@ -35,7 +35,7 @@ In early 2017, I decided to remake Nutella Wars in Java.
 
 Game Play
 ------
-Using the command line, navigate to different locations within the game to train, heal, and battle other jars.
+Using the command line, navigate to different locations within the game to train, heal, and battle other jars. Create an account and pick the class you want to play as: **Offensive**, **Defensive**, or **Magical**.
 
 ### Jar Central
 Reach other locations in the game: Jarena, Hazelnut Hospitol, the Shop.
